@@ -1,0 +1,6 @@
+[submodule "cinstar_frontend_demo"]
+	path = cinstar_frontend_demo
+	url = https://github.com/tranxuanbinhn/cinstar_frontend_demo
+[submodule "cinstar_backend"]
+	path = cinstar_backend
+	url = https://github.com/tranxuanbinhn/cinstar_demo
