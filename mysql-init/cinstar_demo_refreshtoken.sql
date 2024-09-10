@@ -1,0 +1,63 @@
+-- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
+--
+-- Host: localhost    Database: cinstar_demo
+-- ------------------------------------------------------
+-- Server version	8.0.13
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+ SET NAMES utf8 ;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `refreshtoken`
+--
+
+DROP TABLE IF EXISTS `refreshtoken`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `refreshtoken` (
+  `create_date` datetime(6) DEFAULT NULL,
+  `expiry_date` datetime(6) DEFAULT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `modified_date` datetime(6) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `create_by` varchar(255) DEFAULT NULL,
+  `modified_by` varchar(255) DEFAULT NULL,
+  `token` varchar(255) NOT NULL,
+  `userid` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UKor156wbneyk8noo4jstv55ii3` (`token`),
+  UNIQUE KEY `UK81otwtvdhcw7y3ipoijtlb1g3` (`user_id`),
+  KEY `FKnsx5s112ncrfc1ei7kfjqxwo7` (`userid`),
+  CONSTRAINT `FKa652xrdji49m4isx38pp4p80p` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `FKnsx5s112ncrfc1ei7kfjqxwo7` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `refreshtoken`
+--
+
+LOCK TABLES `refreshtoken` WRITE;
+/*!40000 ALTER TABLE `refreshtoken` DISABLE KEYS */;
+INSERT INTO `refreshtoken` VALUES ('2024-08-10 16:45:41.272000','2024-08-11 09:45:41.219034',1,NULL,10,'Usertest10',NULL,'080a8a40-3045-483f-9c69-1d55e8e42270',NULL),('2024-08-23 20:28:30.470000','2024-09-02 13:28:30.460004',43,NULL,NULL,'admin',NULL,'43b5c4eb-bba5-47dc-a12c-18f128c1dd78',12),('2024-08-24 08:37:59.466000','2024-09-03 01:37:59.459798',47,NULL,NULL,'usertest29',NULL,'0a9f7b63-e64c-42c7-94a9-84fb191b424e',13),('2024-08-24 12:47:02.024000','2024-09-03 05:47:01.891487',48,NULL,NULL,'usertest29',NULL,'3fb5bba7-2662-4a46-b429-713d9584e10c',13),('2024-08-24 13:48:16.529000','2024-09-03 06:48:16.495606',49,NULL,NULL,'usertest29',NULL,'977ba782-773c-4db6-9998-b1624c328bc8',13),('2024-08-24 15:09:38.108000','2024-09-03 08:09:38.079234',52,NULL,NULL,'usertest29',NULL,'8baffc7c-92c6-4750-854c-62e624b84de6',13),('2024-09-09 17:57:47.815000','2024-09-19 10:57:47.815025',90,NULL,NULL,'Usertest10',NULL,'36d81f7f-08d9-473e-891b-0ad5e09fcf99',10);
+/*!40000 ALTER TABLE `refreshtoken` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-09-10 12:59:38
