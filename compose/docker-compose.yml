@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: "mysql:8.0"
+    environment:
+      MYSQL_ROOT_PASSWORD: xuanbinh1234
+      MYSQL_DATABASE: cinstar_demo
+    ports:
+      - "8013:3306"
+    volumes:
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - app-network
+    
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_APPLICATION_NAME=cinstar
+      - SERVER_PORT=8081
+      - CINSTAR_APP_JWTSECRET=cinstarSecretKeycinstarSecretKeycinstarSecretKey
+      - CINSTAR_APP_JWTEXPIRATIONMS=36000000
+      - CINSTAR_APP_JWTREFRESHEXPIRATIONMS=864000000
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/cinstar_demo
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=xuanbinh1234
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL8Dialect
+      - THEMOVIEDB_ACCESSTOKEN=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMjRiMGJlYTY2OGM5NmRjZGI2OGQ1Yjc4ODAxZmUyNCIsIm5iZiI6MTcyMTM2MDcyNy4xNjg4MjYsInN1YiI6IjY2OTllMGI2MjY2OTczNDVhNTk0MTQ0NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.P48AEoN5hwV0UsY2Z0eiVsIWu3iK9qNM6ys-ghLuc74
+      - THEMOVIEDB_URL=https://api.themoviedb.org/3/movie/upcoming?language=vi&page=1
+      - THEMOVIEDB_URL_SHOWING=https://api.themoviedb.org/3/movie/now_playing?language=vi&page=1
+      - THEMOVIEDB_URL_MAIN=https://api.themoviedb.org/3/movie/
+      - A=http://image.tmdb.org/t/p/w500/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - ALLOWED_ORIGIN=http://localhost:3000/
+      - VNP_RETURNURL=http://localhost:3000/result
+      - VNP_TMN_CODE=2YBERWBW
+      - VNP_HASH_SECRET=FKITIOCDQUUFESRNAVATNSLZHCLXDVTO
+    networks:
+      - app-network
+    depends_on:
+      - mysql
+      - redis
+
+  redis:
+    image: "redis/redis-stack-server:latest"
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+
+
+networks:
+  app-network:
+    driver: bridge

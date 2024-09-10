@@ -1,0 +1,28 @@
+# Stage 1: Build stage
+FROM maven:3.8.4-openjdk-17-slim AS build
+
+# Set working directory
+WORKDIR /app/backend
+
+# Copy Maven configuration and source code
+COPY ./cinstar_backend/pom.xml ./ 
+COPY ./cinstar_backend/.mvn .mvn
+COPY ./cinstar_backend/src src
+
+# Build the project and create the executable JAR
+RUN mvn clean package -DskipTests
+
+# Stage 2: Run stage
+FROM openjdk:17-jdk-alpine
+
+# Set working directory
+WORKDIR /cinstar/backend
+
+# Copy the JAR file from the build stage
+COPY --from=build /app/backend/target/cinstar-demo.jar /cinstar/backend/cinstar-demo.jar
+
+# Expose port for the Spring Boot application
+EXPOSE 8081
+
+# Run the Spring Boot application
+ENTRYPOINT ["java", "-jar", "/cinstar/backend/cinstar-demo.jar"]
