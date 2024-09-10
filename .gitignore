@@ -1,3 +1,10 @@
+<<<<<<< HEAD
 Dockerfile.backend
 Dockerfile.frontend
 compose/
+=======
+
+Dockerfile.backend
+Dockerfile.frontend
+compose/
+>>>>>>> master
