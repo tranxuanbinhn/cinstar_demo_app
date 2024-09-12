@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mysql:
-    image: binhxcz/mysql:8.0
+    image: "mysql:8.0"
     environment:
       MYSQL_ROOT_PASSWORD: xuanbinh1234
       MYSQL_DATABASE: cinstar_demo
@@ -14,7 +14,9 @@ services:
       - app-network
     
   frontend:
-    image: binhxcz/frontend:lastest
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
     ports:
       - "3000:3000"
     networks:
@@ -22,9 +24,10 @@ services:
     depends_on:
       - backend
 
-      
   backend:
-    image: binhxcz/backend:lastest
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
     ports:
       - "8081:8081"
     environment:
@@ -59,13 +62,14 @@ services:
       - redis
 
   redis:
-    image: binhxcz/redis:lastest
+    image: "redis/redis-stack-server:latest"
     ports:
       - "6379:6379"
     networks:
       - app-network
 
- 
+
+
 networks:
   app-network:
     driver: bridge
