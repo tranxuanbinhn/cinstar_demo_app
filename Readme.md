@@ -46,7 +46,7 @@ To install project, follow these steps:
 
 1. Clone repository:
    ```bash
-        $ git clone --recurse-submodules https://github.com/tranxuanbinhn/cinstar_demo_app
+   $ git clone --recurse-submodules https://github.com/tranxuanbinhn/cinstar_demo_app
     
 
 2. Run docker service
