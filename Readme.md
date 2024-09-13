@@ -56,11 +56,11 @@ To install project, follow these steps:
     docker-compose up --build
 ##### Acount test:
     admin:
-        admin2@gmail.com
+        admin2
         Abcd1234@
     user:
         Usertest10
         Usertest11@
 
 ### video demo:
-https://youtu.be/dk6Zrtz7gME?si=SrF910S0gsHq1es-
+https://youtu.be/WAdts1fpD1g
