@@ -6,10 +6,15 @@ This is a website booking ticket movie
 
 Technology
 **Backend** : Springboot
+
 **Frontend**: Reactjs
+
 **Database**: Mysql
+
 **Other**: Redis, Websocket 
+
 __Webapp use api themoviedb to get Movies__
+
 __Use api VNpay to payment__
 
 Application provides functions:
